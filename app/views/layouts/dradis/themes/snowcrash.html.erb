@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>    <html class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>    <html class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html> <!--<![endif]-->
+<head>
+  <title><%= page_title %></title>
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <link href="/favicon.ico" rel="shortcut icon" />
+  <link href="/favicon.ico" rel="icon" />
+
+  <%= stylesheet_link_tag 'dradis/themes/snowcrash/manifests/application.css' %>
+  <%= javascript_include_tag 'dradis/themes/snowcrash/manifests/application.js' %>
+
+  <!--[if lt IE 8]>
+  <%= stylesheet_link_tag "font-awesome-ie7.min.css", :media => "all" %>
+  <![endif]-->
+
+  <%= csrf_meta_tag %>
+</head>
+<body class="<%= controller_name %>">
+  <%= render "layouts/dradis/themes/snowcrash/navbar" %>
+
+  <div class="body-wrapper">
+    <div class="main-wrapper">
+      <div class="main-sidebar">
+        <div class="inner">
+          <ul id="main-menu">
+            <%= content_tag :li, :class => controller_name == 'issues' ? 'active' : '' do %>
+              <%= link_to issues_path do %>
+                <i class="icon-bug"></i> <span>All issues</span>
+              <% end %>
+            <% end %>
+          </ul>
+          <%= render "layouts/dradis/themes/snowcrash/nodes" %>
+
+          <%# need to include this modal here, because not all pages have
+              breadcrums (e.g. Project#show).
+              Can't move it inside _nodes, because it is used for the "Move
+              node" modal, and it would nest :form tags breaking them %>
+          <%= render partial: 'dradis/themes/snowcrash/nodes/modals/add_branch' %>
+      </div>
+      </div>
+      <div class="main-content <%= content_for?(:sidebar) ? 'no-padding' : ''%>">
+        <noscript>
+          <div class="alert alert-error" style="margin-top: 2em">
+            <h4>Error</h4>
+            <p>Please enable JavaScript support.</p>
+          </div>
+        </noscript>
+        <%= render "layouts/dradis/themes/snowcrash/breadcrumb" %>
+
+        <div id="view-content" class="view-content toggling-note-container">
+          <% if content_for?(:sidebar) %>
+              <div class="secondary-navbar">
+                <div class="inner">
+                  <%= yield :sidebar %>
+                </div>
+              </div>
+              <div class="secondary-navbar-content">
+                <%#= flash_messages %>
+                <%= yield %>
+              </div>
+          <% else %>
+            <%= content_tag :h1, yield(:title) if show_title? %>
+            <div class="row-fluid">
+              <div class="span12">
+                <%#= flash_messages %>
+                <%= yield %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="version">
+      <small><%= version %></small>
+    </div>
+  </div>
+</body>
+</html>

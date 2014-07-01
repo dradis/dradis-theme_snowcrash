@@ -1,0 +1,18 @@
+<ul class="nodes-nav tree-navigation" style="backgroun2sd-color:orange">
+  <li class="tree-header">
+    <div class="add-subnode">
+      <a href="#modal_add_branch_node" data-toggle="modal"><i class="icon-plus"></i></a>
+    </div>
+    <h4><i class="icon-sitemap"></i> Nodes</h4>
+  </li>
+
+  <% nodes = @nodes.select{|n| n.type_id != Dradis::Core::Node::Types::ISSUELIB } %>
+  <% roots = nodes.select{|n| n.parent_id == nil} %>
+  <% if roots.empty? %>
+  <li class="no-nodes">No nodes defined yet</li>
+  <% else %>
+    <% roots.each do |node| %>
+      <%= render partial: 'layouts/dradis/themes/snowcrash/node', locals: {node: node, all: nodes} %>
+    <% end %>
+  <% end %>
+</ul>
