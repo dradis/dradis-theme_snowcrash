@@ -9,6 +9,9 @@ module Dradis
 
         initializer 'snowcrash.asset_precompile_paths' do |app|
           app.config.assets.precompile += ["snowcrash/manifests/*"]
+
+          # for some reason the font-awesome-rails gem doesn't do this automatically
+          app.config.assets.precompile += %w( font-awesome-ie7.min.css )
         end
 
 #     NAME = "Burp Scanner output (.xml) file upload"
