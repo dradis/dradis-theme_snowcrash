@@ -18,6 +18,9 @@ Gem::Specification.new do |s|
   s.executables = s.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   s.test_files = s.files.grep(%r{^(test|spec|features)/})
 
-  s.add_dependency 'rails', '~> 4.1.1'
   s.add_dependency 'font-awesome-rails', '~> 3.2'
+  s.add_dependency 'jquery-fileupload-rails'
+  s.add_dependency 'jquery-hotkeys-rails'
+  s.add_dependency 'jquery-rails'
+  s.add_dependency 'rails', '~> 4.1.1'
 end
