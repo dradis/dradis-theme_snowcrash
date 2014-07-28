@@ -64,14 +64,14 @@
                 </div>
               </div>
               <div class="secondary-navbar-content">
-                <%#= flash_messages %>
+                <%= flash_messages %>
                 <%= yield %>
               </div>
           <% else %>
             <%= content_tag :h1, yield(:title) if show_title? %>
             <div class="row-fluid">
               <div class="span12">
-                <%#= flash_messages %>
+                <%= flash_messages %>
                 <%= yield %>
               </div>
             </div>

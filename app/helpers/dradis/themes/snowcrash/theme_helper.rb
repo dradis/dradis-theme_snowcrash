@@ -10,7 +10,7 @@ module Dradis
                  info: ' alert-info',
                notice: ' alert-success',
               warning: ''
-              }[name]
+            }.fetch(name.to_sym, " unknown_flash_#{name}")
 
             content_tag :div, :class => flash_css do
               [
