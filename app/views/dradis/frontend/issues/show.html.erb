@@ -1,0 +1,10 @@
+<% title @issue.fields['Title'] %>
+
+<% content_for :sidebar do %>
+  <%= render 'sidebar'%>
+<% end %>
+
+<!-- Main content -->
+<div id="issue-viewer">
+  <%= render partial: 'issue_content', locals: {issue: @issue} %>
+</div>

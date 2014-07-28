@@ -1,0 +1,32 @@
+<% title 'Issues' %>
+
+<% content_for :sidebar do %>
+  <%= render 'sidebar'%>
+<% end %>
+
+<!-- Main content -->
+<div id="issue-viewer">
+
+  <div class="toggler-note-content">
+    <div class="inner note-text-inner">
+      <!-- <div class="page-header">
+        <h1>Summary of Issues</h1>
+      </div> -->
+
+      <% if @issues.any? %>
+      <div id="issue-table">
+        <div class="issue-actions">
+          <div class="btn-group">
+            <a id="delete-selected" class="btn" data-confirm="Are you sure?" data-method="delete"><i class="icon-trash"></i></a>
+          </div>
+        </div>
+        <%= render 'table', issues: @issues %>
+      </div>
+      <% else %>
+      <p class="lead">You haven't added any issues to the project yet.</p>
+      <p>Use the <strong><i class="icon-plus"></i></strong> icon next to <em>Project issues</em> on the side bar to add a new issue manually.</p>
+      <p>Or use the <em>Import issues</em> <strong><i class="icon-chevron-down"></i></strong> menu to import an issue from an external source.</p>
+      <% end %>
+    </div>
+  </div>
+</div>

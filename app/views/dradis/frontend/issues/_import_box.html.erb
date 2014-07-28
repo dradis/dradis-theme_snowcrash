@@ -1,0 +1,58 @@
+<div class="header">
+  <div class="header-inner">
+    <div class="options">
+      <div class="dropdown">
+        <%= link_to raw('<i class="icon-chevron-down"></i>'), 'javascript:void(0)', class: 'import-toggle', data: {toggle: 'collapse', target: '.import-box'} %>
+      </div>
+    </div>
+    <h3>Import issues</h3>
+  </div>
+</div>
+
+<%= content_tag :div, class: 'import-box collapse' do %>
+  <!-- <div class="note-list">
+    <div class="note-list">
+      <div id="import_results_link" class="list-item">
+        <div class="expansion-container">
+          <%= link_to '#', :class => 'view-toggle', :data => {:target => "#import_results_content"} do %>
+            <i class="icon-file-text"></i>
+            Import results
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+ -->
+  <% Plugins::Import.included_modules.sort{|a,b| b::Meta::NAME <=> a::Meta::NAME}.each do |plugin| %>
+  <div>
+    <h5><%= plugin::Meta::NAME %></h5>
+
+    <% plugin::Filters::constants.each do |filter_name| %>
+      <% filter = "#{plugin.name}::Filters::#{filter_name}".constantize %>
+
+      <%= form_tag import_issues_path, class: 'form-search' do %>
+        <%= hidden_field_tag :scope, plugin.name %>
+        <%= hidden_field_tag :filter, filter_name %>
+
+        <div class="control-group input-append">
+          <% query = @query if (@plugin == plugin.name) && (@filter.to_sym == filter_name) %>
+          <%= text_field_tag :query, query, :class => 'span2 search-query', :placeholder => filter::NAME  %>
+          <button type="submit" class="btn">Search</button>
+        </div>
+      <% end %>
+
+    <% end %>
+  </div>
+  <% end %>
+<% end %>
+
+<% if @plugin %>
+<script type="text/javascript">
+$(function(){
+  // display the import sidebar
+  $('.import-toggle').click();
+  $('.import-box').find("input:text[value!='']").focus();
+  $('.import-box').find('.control-group').removeClass('error');
+});
+</script>
+<% end %>

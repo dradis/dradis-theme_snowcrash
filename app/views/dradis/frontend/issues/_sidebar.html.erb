@@ -1,0 +1,13 @@
+  <div class="note-list">
+    <%= content_tag :div, id: 'issue_summary_link', class: current_page?(issues_path) ? 'list-item active' : 'list-item' do %>
+      <div class="expansion-container">
+        <%= link_to issues_path(), class: 'view-toggle-off' do %>
+          <i class="icon-bar-chart"></i>
+          Summary of issues
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= render 'issue_collection' %>
+  <%#= render 'import_box' %>
