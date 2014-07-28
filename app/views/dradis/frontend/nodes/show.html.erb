@@ -1,0 +1,35 @@
+<% title @node.label %>
+
+<% content_for :sidebar do %>
+  <!-- Notes -->
+  <%= render 'sidebar_collection',
+        name: 'Notes',
+        collection: @sorted_notes,
+        new_path: node_notes_path(@node),
+        category_id: Dradis::Core::Category.default.id %>
+
+  <!-- Issues -->
+  <%= render 'sidebar_collection',
+        name: 'Evidence',
+        collection: @sorted_evidence,
+        new_path: node_evidence_index_path(@node),
+        category_id: Dradis::Core::Category.issue.id %>
+
+  <!-- Attachments -->
+  <%#TODO= render 'dradis/themes/snowcrash/attachments/attachment_box' %>
+
+<% end %>
+
+
+<!-- Main content -->
+<div id="note-viewer">
+  <%= render partial: 'dradis/themes/snowcrash/notes/note_content', collection: @node.notes, as: :note %>
+  <%= render partial: 'dradis/themes/snowcrash/notes/note_editor' %>
+  <%= render partial: 'dradis/themes/snowcrash/evidence/evidence_content', collection: @node.evidence, as: :evidence %>
+  <%= render partial: 'dradis/themes/snowcrash/evidence/evidence_editor' %>
+</div>
+
+
+<%# only enable polling in the right controller contexts %>
+<%# this is picked up by poller.js %>
+<%#TODO= content_tag :div,nil, id: 'poller', data: {url: polling_path(format: :js), node: @node.id, after: @last_audit }%>
