@@ -1,11 +1,11 @@
 <%# add the note content %>
-$('#note-viewer').append($("<%= j render('dradis/frontend/notes/note_content', note: @note) %>"));
+$('#note-viewer').append($("<%= j render('dradis/themes/snowcrash/notes/note_content', note: @note) %>"));
 
 <%# hide the no-notes placeholder %>
 $('#notes .placeholder').hide()
 
 <%# add the note link %>
-$('#notes').append($("<%= j render 'dradis/frontend/notes/note', note: @note %>"));
+$('#notes').append($("<%= j render 'dradis/themes/snowcrash/notes/note', note: @note %>"));
 $('#notes a:last').click();
 
 <%# re-enable editor button (see behaviours.js) %>
