@@ -44,6 +44,12 @@ module Dradis
           auto_link(RedCloth.new(output, [:filter_html, :no_span_caps]).to_html, sanitize: false ).html_safe
         end
 
+        def short_filename(long_filename)
+          # hyphens are word-wrapped by the browser
+          return long_filename if long_filename =~ /\-/
+
+          return truncate(long_filename, length: 12)
+        end
       end
     end
   end
