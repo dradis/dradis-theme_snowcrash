@@ -1,0 +1,23 @@
+<div id="<%= dom_id(note) %>_content" class="collapse toggler-note-content">
+  <div class="remove-note options">
+    <%#= link_to 'edit', edit_node_note_path(@node, note), class: 'view-toggle-off editor-toggle-off' %>
+    <%= link_to 'edit', '#',
+          :class => 'view-toggle editor-toggle',
+          :data => {
+            :button => 'Save changes',
+            :cancel => "##{dom_id(note)}_link",
+            :category_id => note.category_id,
+            :content => note.text,
+            :target => '#notes_editor',
+            :title => 'Edit note',
+            :url => node_note_path(@node, note)
+          } %>
+    <%= link_to 'remove', [@node, note], :class => 'text-error', :confirm => 'Are you sure?', :method => :delete, :remote => true %>
+  </div>
+  <div class="inner note-text-inner">
+    <h3>Content for this note</h3>
+    <div class="content-textile">
+      <%= markup(note.text) %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<%# TODO: implement an undo by hiding the block or greying it out %>
+$('#note_<%= @note.id %>_content').fadeOut(300, function(){
+  $(this).remove();
+});
+$('#note_<%= @note.id %>_link').slideUp(300, function(){
+  $(this).remove();
+  if ($('#notes .list-item').size() == 1)
+  {
+    $('#notes .placeholder').slideDown(300);
+  }
+});

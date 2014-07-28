@@ -27,7 +27,7 @@
 </div>
 <div id="<%= name.downcase %>" class="note-list">
   <% if collection.any? %>
-    <%= render collection%>
+    <%= render partial: "dradis/frontend/#{name.downcase}/#{name.downcase.singularize}", collection: collection%>
   <% end %>
   <div class="list-item">
     <div class="note placeholder <%= 'hide' if collection.any? %>">(nothing yet)</div>

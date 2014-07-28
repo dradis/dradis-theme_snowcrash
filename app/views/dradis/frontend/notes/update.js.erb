@@ -1,0 +1,9 @@
+<%# update the note content %>
+$('#note_<%= @note.id %>_content').replaceWith("<%= j render('dradis/frontend/notes/note_content', note: @note) %>");
+
+<%# update the note link %>
+$('#note_<%= @note.id %>_link').replaceWith("<%= j render 'dradis/frontend/notes/note', note: @note %>");
+$('#note_<%= @note.id %>_link a').click();
+
+<%# re-enable editor button (see behaviours.js) %>
+$('#notes_editor input[type=submit]').attr('disabled', false)

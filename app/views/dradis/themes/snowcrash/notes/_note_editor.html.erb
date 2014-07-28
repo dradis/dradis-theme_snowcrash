@@ -1,0 +1,16 @@
+<div id="notes_editor" class="collapse toggler-note-content">
+  <div class="inner note-text-inner">
+    <h3>Add note</h3>
+    <%= simple_form_for [@node, @new_note], format: :js, remote: true do |f| %>
+
+      <%= f.association :category, collection: @categories, label_method: :name, prompt: 'Assign note category' %>
+      <%= f.input :text, label: false, input_html: {class: 'textile', data: {preview_url: preview_path, help_url: markup_path}} %>
+
+      <div class="form-actions">
+        <%= f.button :submit, nil, class: 'btn btn-dradispro' %> or
+        <%= link_to 'Cancel', 'javascript:void(null);', class: 'cancel-link' %>
+        <%#= link_to 'Remove', [@node, Note.new], :confirm => 'Are you sure?', :method => :delete, :remote => true, :class => 'btn btn-danger pull-left' %>
+      </div>
+    <% end %>
+  </div>
+</div>
