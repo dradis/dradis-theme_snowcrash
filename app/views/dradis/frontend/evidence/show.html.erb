@@ -1,0 +1,35 @@
+<% title @issue.fields['Title'] %>
+
+<div class="pull-right"><%= link_to '&larr; Back to node evidence'.html_safe, node_evidence_index_path(@node) %></div>
+
+<%= div_for @evidence do %>
+  <h2>Evidence for this node (<%= @node.label %>) <%= link_to edit_node_evidence_path(@node, @evidence) , class: 'btn btn-mini' do %><i class="icon-pencil"></i> Edit<% end -%></h2>
+  <div class="row">
+    <div class="span8 offset1 content content-textile">
+      <%= markup(@evidence.content) %>
+    </div>
+  </div>
+
+  <h2>General Issue information</h2>
+  <div class="row">
+    <div class="span8 offset1 content content-textile">
+      <%= markup(@issue.text) %>
+    </div>
+  </div>
+
+  <h2>Also affects</h2>
+  <div class="row">
+    <div class="content span8 offset1">
+      <% affected = @issue.affected - [@evidence.node] %>
+      <% if affected.empty? %>
+      (nothing)
+      <% else %>
+        <ul>
+        <% for node in affected do %>
+          <li><i class="icon-node-<%= ['default','host'][node.type_id] %>"></i> <%= node.label %></li>
+        <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+<% end %>

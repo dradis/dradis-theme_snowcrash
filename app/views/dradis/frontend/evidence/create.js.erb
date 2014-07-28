@@ -1,0 +1,19 @@
+<% if @evidence.valid? %>
+<%# add the evidence content %>
+$('#note-viewer').append($("<%= j render('dradis/themes/snowcrash/evidence/evidence_content', evidence: @evidence) %>"));
+
+<%# hide the no-issues placeholder %>
+$('#evidence .placeholder').hide()
+
+<%# add the evidence link %>
+$('#evidence').append($("<%= j render 'dradis/themes/snowcrash/evidence/evidence', evidence: @evidence %>"));
+$('#evidence a:last').click();
+<% else %>
+<%# replace the editor %>
+$('#evidence_editor').replaceWith("<%= j render(partial: 'dradis/themes/snowcrash/evidence/evidence_editor') %>")
+$('#evidence_editor').addClass('in')
+$('#evidence_editor .textile').textile();
+<% end -%>
+
+<%# re-enable editor button (see behaviours.js) %>
+$('#evidence_editor input[type=submit]').attr('disabled', false)

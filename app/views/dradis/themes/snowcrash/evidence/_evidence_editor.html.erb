@@ -1,0 +1,21 @@
+<div id="evidence_editor" class="collapse toggler-note-content">
+  <div class="inner note-text-inner">
+    <h3>Add evidence</h3>
+      <% evidence_instance = @new_evidence || @evidence %>
+      <%= simple_form_for [@node, evidence_instance], url: node_evidence_index_path(@node, evidence_instance), format: :js, remote: true do |f| %>
+      <%= f.error_notification %>
+
+      <%= f.association :issue,
+              collection: [OpenStruct.new(title: 'Add new issue (edit details later)', id: :new )] + @issues,
+              label_method: :title,
+              prompt: 'Choose an Issue' %>
+      <%= f.input :content, label: false, input_html: { class: 'textile', data: { preview_url: preview_path, help_url: markup_path} } %>
+
+      <div class="form-actions">
+        <%= f.button :submit, nil, class: 'btn btn-dradispro' %> or
+        <%= link_to 'Cancel', "javascript:void(null);", class: 'cancel-link' %>
+        <%#= link_to 'Remove', [@node, Note.new], :confirm => 'Are you sure?', :method => :delete, :remote => true, :class => 'btn btn-danger pull-left' %>
+      </div>
+    <% end %>
+  </div>
+</div>

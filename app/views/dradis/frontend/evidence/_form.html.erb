@@ -1,0 +1,13 @@
+<%= simple_form_for [@node, @evidence], html: {class: 'form-horizontal' } do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :issue, collection: @issues, label_method: :title, prompt: 'Choose an Issue' %>
+    <%= f.input :content, input_html: { class: 'textile', data: { preview_url: preview_path } } %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, nil, class: 'btn btn-dradispro' %> or
+    <%= link_to 'Cancel', node_evidence_index_path(@node) %>
+  </div>
+<% end %>

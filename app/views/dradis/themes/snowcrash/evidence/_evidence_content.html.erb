@@ -1,0 +1,31 @@
+<div id="<%= dom_id(evidence) %>_content" class="collapse toggler-note-content">
+  <div class="remove-note options">
+    <%= link_to 'edit', '#',
+          :class => 'view-toggle editor-toggle',
+          :data => {
+            :button => 'Save changes',
+            :cancel => "##{dom_id(evidence)}_link",
+            :content => evidence.content,
+            :issue_id => evidence.issue.id,
+            :target => '#evidence_editor',
+            :title => 'Edit issue',
+            :url => node_evidence_path(@node, evidence)
+          } %>
+    <%= link_to 'remove', [evidence.node, evidence], :class => 'text-error', :confirm => 'Are you sure?', :method => :delete, :remote => true %>
+  </div>
+  <div class="inner note-text-inner">
+    <h3>Evidence for this instance</h3>
+    <div class="content-textile"><%= markup(evidence.content) %></div>
+
+    <!-- Issue wrapper -->
+    <div>
+      <div class="pull-right">
+        <%= link_to 'open issue', issue_path(evidence.issue)%>
+      </div>
+      <h3>Issue information</h3>
+      <div id="<%= dom_id(evidence.issue) %>_text" class="content-textile">
+        <%= markup(evidence.issue.text) %>
+      </div>
+    </div>
+  </div>
+</div>

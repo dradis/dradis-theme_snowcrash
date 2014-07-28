@@ -1,0 +1,8 @@
+<div id="<%= dom_id(evidence) %>_link" class="list-item">
+  <div class="expansion-container">
+    <%= link_to '#', class: 'view-toggle', data: {target: "##{dom_id(evidence)}_content"} do %>
+      <i class="icon-flag"></i>
+      <%= evidence.issue.title %>
+    <% end %>
+  </div>
+</div>

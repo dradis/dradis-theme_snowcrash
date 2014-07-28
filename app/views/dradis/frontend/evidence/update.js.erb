@@ -1,0 +1,16 @@
+<% if @evidence.valid? %>
+  <%# update the evidence content %>
+$('#<%= dom_id(@evidence) %>_content').replaceWith("<%= j render('dradis/themes/snowcrash/evidence/evidence_content', evidence: @evidence) %>");
+
+<%# update the evidence link %>
+$('#<%= dom_id(@evidence) %>_link').replaceWith("<%= j render 'dradis/themes/snowcrash/evidence/evidence', evidence: @evidence %>");
+$('#<%= dom_id(@evidence) %>_link a').click();
+<% else %>
+<%# replace the editor %>
+$('#evidence_editor').replaceWith("<%= j render(partial: 'dradis/themes/snowcrash/evidence/evidence_editor') %>")
+$('#evidence_editor').addClass('in')
+$('#evidence_editor .textile').textile();
+<% end -%>
+
+<%# re-enable editor button (see behaviours.js) %>
+$('#evidence_editor input[type=submit]').attr('disabled', false)
