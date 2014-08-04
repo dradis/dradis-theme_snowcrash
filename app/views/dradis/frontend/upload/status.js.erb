@@ -1,0 +1,8 @@
+<% if @logs.any? -%>
+  SmartPoller.parsing = <%= @uploading %>;
+  $("#console").append( '<%= escape_javascript(render(partial: "dradis/themes/snowcrash/logs/log", collection: @logs)) %>' );
+  $("#console").prop({ scrollTop: $("#console").prop("scrollHeight") });
+  setTimeout(SmartPoller.updateConsole, 2000);
+<% else -%>
+  setTimeout(SmartPoller.updateConsole, 4000);
+<% end -%>
