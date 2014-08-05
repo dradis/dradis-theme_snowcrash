@@ -17,11 +17,11 @@ module Dradis
         end
 
         def page_title
-          Dradis::Core::Version::string
+          version
         end
 
         def version
-          Dradis::Core::Version::string
+          "Dradis Framework #{Dradis::Core::version}"
         end
       end
     end
