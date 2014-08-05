@@ -31,7 +31,7 @@ jQuery ->
 
   # -------------------------------------------------------- Our jQuery plugins
   # Activate jQuery.Textile
-  # $('.textile').textile();
+  $('.textile').textile();
 
   # Activate jQuery.breadCrums
   $('.breadcrumb').breadcrums

@@ -6,6 +6,7 @@
 //= require jquery-fileupload
 //= require jquery.form
 //= require jquery-hotkeys
+//= require jquery.textile
 //= require bootstrap
 //= require d3
 
@@ -18,6 +19,7 @@
 //= require dradis/themes/snowcrash/behaviors
 //= require dradis/themes/snowcrash/keyboard_shortcuts
 
+//= require dradis/themes/snowcrash/modules/export
 //= require dradis/themes/snowcrash/modules/issues
 //= require dradis/themes/snowcrash/modules/poller
 //= require dradis/themes/snowcrash/modules/uploads
