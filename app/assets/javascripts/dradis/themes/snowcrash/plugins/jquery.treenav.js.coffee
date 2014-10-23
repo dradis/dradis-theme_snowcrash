@@ -70,7 +70,8 @@ do ($ = jQuery, window, document) ->
       if children.hasClass('opened')
         children.slideUp(200)
       else
-        children.slideDown(200)
+        children.slideDown(200, ->($.get(target.attr('href'))))
+
       children.toggleClass('opened')
 
       target.find('i')
