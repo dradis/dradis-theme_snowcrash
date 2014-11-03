@@ -1,1 +1,11 @@
- $("*[data-id=<%= dom_id(@node, 'menu') %>]").html("<%= j(render partial: 'layouts/dradis/themes/snowcrash/node', collection: @node.children) %>");
+<%#
+  # If there are any children, populate the corresponding part of the tree. If
+  # there are no children, remove the triangle icon from the parent.
+%>
+<% if @children.any? %>
+$("*[data-id=<%= dom_id(@node, 'menu') %>]").html("<%= j(render partial: 'layouts/snowcrash/node', collection: @children) %>");
+<% else %>
+$parent = $("*[data-id=<%= dom_id(@node, 'menu') %>]").parent('li')
+$parent.removeClass('hasSubmenu')
+$parent.find('.toggle').replaceWith('<span class="toggle">&nbsp;</span>')
+<% end %>
