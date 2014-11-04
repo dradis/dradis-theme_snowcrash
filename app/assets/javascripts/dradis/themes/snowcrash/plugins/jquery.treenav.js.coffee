@@ -63,10 +63,11 @@ do ($ = jQuery, window, document) ->
 
     loadChildren: (target) =>
       if !target.siblings('.children').first().has('li.node').length
+        $menu = target.siblings('.children')
         $.get(target.attr 'href')
         .fail ->
-          target.siblings('.children').find('li.loading').hide()
-          target.siblings('.children').find('li.error').show()
+          $menu.find('li.loading').hide()
+          $menu.find('li.error').show()
 
     toggleChildren: (e) =>
       e.preventDefault()

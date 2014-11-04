@@ -4,7 +4,8 @@ module Dradis
       module ThemeHelper
         def css_class_for_node(node)
           classes = []
-          classes << 'hasSubmenu' if node.children.any?
+          # Avoid the extra .children call to save a DB query. Defer to ajax-loading to find out.
+          classes << 'hasSubmenu' # if node.children.any?
           classes << 'active' if node == @node
           classes << 'in' if @node && @node.parent_id == node.id
           classes.join(' ')
