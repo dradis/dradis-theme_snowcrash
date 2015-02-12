@@ -10,6 +10,12 @@ module Dradis
         initializer 'snowcrash.asset_precompile_paths' do |app|
           app.config.assets.precompile += ["snowcrash/manifests/*"]
 
+          # In Rails 4 we can't have fonts in ./vendor/assets/ without this line
+          app.config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
+
+          # In Rails 4 we can't have images in ./vendor/assets/images/
+          app.config.assets.precompile += %w{ jquery.textile.loading.gif jquery.textile.fullscreen.png }
+
           # for some reason the font-awesome-rails gem doesn't do this automatically
           app.config.assets.precompile += %w( font-awesome-ie7.min.css )
         end
