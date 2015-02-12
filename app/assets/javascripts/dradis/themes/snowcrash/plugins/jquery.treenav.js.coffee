@@ -61,6 +61,14 @@ do ($ = jQuery, window, document) ->
     #   subnodeWrapper.slideToggle(200).find('input').focus()
     #   @$el.find('.add-subnode-wrapper').not(subnodeWrapper).slideUp('fast')
 
+    loadChildren: (target) =>
+      if !target.siblings('.children').first().has('li.node').length
+        $menu = target.siblings('.children')
+        $.get(target.attr 'href')
+        .fail ->
+          $menu.find('li.loading').hide()
+          $menu.find('li.error').show()
+
     toggleChildren: (e) =>
       e.preventDefault()
       e.stopPropagation()
@@ -70,7 +78,9 @@ do ($ = jQuery, window, document) ->
       if children.hasClass('opened')
         children.slideUp(200)
       else
-        children.slideDown(200)
+        that = this
+        children.slideDown(200, -> that.loadChildren(target))
+
       children.toggleClass('opened')
 
       target.find('i')

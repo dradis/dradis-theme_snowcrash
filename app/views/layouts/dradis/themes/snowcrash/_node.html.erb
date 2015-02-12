@@ -1,21 +1,24 @@
-<% children = all.select{|n| n.parent_id == node.id} %>
-
 <%= content_tag_for :li, node, data: {node_id: node.id, label: node.label, url: node_path(node)}, class: css_class_for_node(node) do %>
 
-  <% if children.any? %>
-    <a class='toggle' href="#"><i class="icon-caret-right"></i></a>
-  <% else %>
-    <span class='toggle'>&nbsp;</span>
-  <% end %>
+  <%# if node.children.any? %>
+    <%= link_to tree_node_path(node, format: :js), class: 'toggle' do %>
+      <i class="icon-caret-right"></i>
+    <% end %>
+  <%# else %>
+    <!-- <span class='toggle'>&nbsp;</span> -->
+  <%# end %>
 
   <%= link_to node.label, node %>
 
-  <% if children.any? %>
-    <%= content_tag :ul, id: dom_id(node, 'menu'), class: "children #{css_class_for_sub_nodes(node)}" do %>
-      <% children.each do |child| %>
-        <%= render "layouts/dradis/themes/snowcrash/node", node: child, all: all %>
+  <%# if node.children.any? %>
+    <%= content_tag :ul, data: {id: dom_id(node, 'menu')}, class: "children #{css_class_for_sub_nodes(node)}" do %>
+      <% if node.ancestor_of?(@node) %>
+        <%= render partial: "layouts/dradis/themes/snowcrash/node", collection: node.children %>
+      <% else %>
+        <li class="loading">Loading...</li>
+        <li class="error">Loading error. Please try again.</li>
       <% end %>
-    <% end -%>
-  <% end -%>
+    <% end %>
+  <%# end %>
 
 <% end %>
