@@ -46,12 +46,23 @@ class IssueTable
   deleteSelected: (element, answer) ->
     if answer
       $('#tbl-issues').find('input[type=checkbox]:checked.js-multicheck').each ->
-        $.ajax
+        $row = $(this).parent().parent()
+        $($row.find('td')[2]).replaceWith("<td class=\"loading\">Deleting...</td>")
+        $that = $(this)
+        $.ajax $(this).data('url'), {
           type: 'DELETE'
-          url: $(this).data('url')
-          # TODO: handle response success true/false
-        $(this).parent().parent().remove()
-        # TODO: show placeholder if no issues left
+          dataType: 'json'
+          success: (data) ->
+            # Delete row from the table
+            $row.remove()
+            # TODO: show placeholder if no issues left
+
+            # Delete link from the sidebar
+            $("#issue_#{data.id}").remove()
+
+          error: (foo,bar,foobar) ->
+            $($row.find('td')[2]).replaceWith("<td class='error'>Please try again</td>")
+        }
 
     # prevent Rails UJS from doing anything else.
     false
