@@ -6,7 +6,7 @@
 <section>
   <h2>Choose a file</h2>
   <%= form_tag upload_manager_path(format: :js), multipart: true, id: 'new_upload', data: {parse_url: upload_parse_path(), status_url: upload_status_path()} do %>
-    <%= select_tag  'uploader', options_from_collection_for_select(@plugins, :name, :name) %>
+    <%= select_tag  'uploader', options_from_collection_for_select(@uploaders, :name, :name) %>
     <%= file_field_tag 'file' %>
     <%= hidden_field_tag 'item_id' %>
     <%= hidden_field_tag 'format', 'js' %>
@@ -44,11 +44,11 @@
       </tr>
     </thead>
     <tbody>
-      <% @plugins.each do |plugin| %>
+      <% @uploaders.map(&:meta).each do |uploader| %>
       <tr>
-        <td><code><%= plugin::Engine::plugin_name %></code></td>
-        <td><%= plugin::Engine::plugin_description %></td>
-        <td><%= plugin::VERSION::STRING %></td>
+        <td><code><%= uploader[:name] %></code></td>
+        <td><%= uploader[:description] %></td>
+        <td><%= uploader[:version] %></td>
       </tr>
       <% end %>
     </tbody>
