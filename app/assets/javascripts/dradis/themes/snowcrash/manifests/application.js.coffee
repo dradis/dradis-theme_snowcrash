@@ -23,3 +23,4 @@
 //= require dradis/themes/snowcrash/modules/issues
 //= require dradis/themes/snowcrash/modules/poller
 //= require dradis/themes/snowcrash/modules/uploads
+//= require dradis/themes/snowcrash/modules/configurations
