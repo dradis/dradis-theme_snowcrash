@@ -26,8 +26,9 @@ do ($ = jQuery, window, document) ->
     insertElement: (index,element) =>
       $parent = $(element)
       parent_label = $parent.data('label')
+      parent_html = $('<div/>').text(parent_label).html();
       parent_href = $parent.data('url')
-      @$el.find('li:first').after("<li><a href=\"#{parent_href}\">#{parent_label}</a> <span class=\"divider\">/</span></li>")
+      @$el.find('li:first').after("<li><a href=\"#{parent_href}\">#{parent_html}</a> <span class=\"divider\">/</span></li>")
 
 
   $.fn[pluginName] = (options) ->
