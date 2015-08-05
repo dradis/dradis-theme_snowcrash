@@ -44,13 +44,13 @@
 
         <% info[:templates].each do |template| %>
         <label class="radio">
-          <%= radio_button_tag :template, template %>
+          <%= radio_button_tag :template, template, template == info[:templates].first %>
           <%= template %>
         </label>
         <% end %>
 
         <div class="text-center">
-          <button id="export-button" class="btn btn-large btn-dradispro" disabled="disbled">Export</button>
+          <button id="export-button" class="btn btn-large btn-dradispro">Export</button>
         </div>
       <% end %>
     <% end %>
