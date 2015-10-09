@@ -18,16 +18,16 @@
             <%= link_to node_attachment_path(node, attachment.filename), download: attachment.filename, title: attachment.filename do %>
             <i class="icon-paper-clip"></i> <%= short_filename(attachment.filename) %>
             <% end %>
+
+            <span class="delete size pull-right">
+              <small><%= number_to_human_size(File.size(attachment)) %></small>
+
+              <button class="btn btn-danger" data-type="DELETE" data-url="<%= node_attachment_path(node,attachment.filename) %>">
+                <i class="icon-trash icon-white"></i>
+                <span></span>
+              </button>
+            </span>
           </div>
-          <span class="size">
-            <span><%= number_to_human_size(File.size(attachment)) %></span>
-          </span>
-          <span class="delete">
-            <button class="btn btn-danger" data-type="DELETE" data-url="<%= node_attachment_path(node,attachment.filename) %>">
-              <i class="icon-trash icon-white"></i>
-              <span></span>
-            </button>
-          </span>
         </td>
       </tr>
         <% end %>
@@ -125,22 +125,6 @@
             </td>
 
         {% } else { %}
-            <!-- old preview-based
-            <td class="preview">{% if (file.thumbnail_url) { %}
-                <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
-            {% } %}</td>
-            <td class="name">
-                <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">
-                  {% if (file.name.length > 12) { %}
-                  {%= file.name.substring(0,12) + '...' %}
-                  {% } else { %}
-                  {%= file.name %}
-                  {% } %}
-                </a>
-            </td>
-            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-            <td colspan="2"></td>
-            -->
             <td class="name" colspan="4">
               <div>
                 <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">
@@ -151,14 +135,14 @@
                   {%= file.name %}
                   {% } %}
                 </a>
-              </div>
-              <span class="size">{%=o.formatFileSize(file.size)%}</span>
-              <span class="delete">
-                <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
+		<span class="delete size pull-right">
+		  <small>{%=o.formatFileSize(file.size)%}</small>
+                  <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
                     <i class="icon-trash icon-white"></i>
                     <span>{%locale.fileupload.destroy%}</span>
-                </button>
-              </span>
+                  </button>
+                </span>
+	      </div>
             </td>
         {% } %}
     </tr>
