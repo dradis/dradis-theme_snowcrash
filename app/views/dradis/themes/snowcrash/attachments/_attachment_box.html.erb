@@ -135,14 +135,14 @@
                   {%= file.name %}
                   {% } %}
                 </a>
-		<span class="delete size pull-right">
-		  <small>{%=o.formatFileSize(file.size)%}</small>
+                <span class="delete size pull-right">
+                  <small>{%=o.formatFileSize(file.size)%}</small>
                   <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
                     <i class="icon-trash icon-white"></i>
                     <span>{%locale.fileupload.destroy%}</span>
                   </button>
                 </span>
-	      </div>
+              </div>
             </td>
         {% } %}
     </tr>
